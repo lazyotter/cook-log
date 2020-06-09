@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>huixtocihuatl</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+	<div class="centre">
+		<div id="titlepage">
+			<div class="item-top">
+				<div class="header"> 
+					<h1>huixtocihuatl</h1>
+				</div>
+			</div>
+			<div class="item-bottom"> 
+				<button class=btn onclick="showlogin()" style="width:auto;">Login</button>
+				<button class=btn onclick="document.getElementbyId('register').style.display='block'" style="width:auto;">Register</button>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div id="login" class="modal">
+
+		<!-- Modal Content -->
+		<form class="modal-content animate" action="" method="post" novalidate>
+			{{ form.hidden_tag() }}
+
+			<div class="imgcontainer"> 
+				<span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">&times;</span>
+    		<img src="../static/images/login.jpg" alt="Avatar" class="avatar">
+  		</div>
+
+			<div class="container">
+				{{ form.username.label }}
+				{{ form.username(placeholder="Enter Username") }}
+				{% for error in form.username.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+
+				{{ form.password.label }}
+				{{ form.password(placeholder="Enter Password") }}
+
+				{{ form.submit(class="btn") }}
+				{{ form.remember_me() }} {{form.remember_me.label }}
+			</div>
+    	
+    	<div class="container" style="background-color:#f1f1f1">
+	      <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button>
+	      <span class="psw">Forgot <a href="#">password?</a></span>
+    	</div>
+		</form>
+	</div>
+</body>
+
+<script>
+// Get the modal
+var modal = document.getElementById('login');
+
+function showlogin() {
+	modal.style.display = "block";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</html>
