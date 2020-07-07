@@ -17,12 +17,16 @@
 				</div>
 			</div>
 			<div class="item-bottom"> 
+				{% if current_user.is_anonymous %}
 				<button class=btn onclick="showlogin()" style="width:auto;">Login</button>
-				<button class=btn onclick="document.getElementbyId('register').style.display='block'" style="width:auto;">Register</button>
+				<button class=btn onclick="showregister()" style="width:auto;">Register</button>
+				{% else %}
+				<a class=btn href="{{ url_for('logout') }}">Logout</a>
+				{% endif %}
 			</div>
 		</div>
 	</div>
-	<!-- Modal -->
+	<!-- Login Modal -->
 	<div id="login" class="modal">
 
 		<!-- Modal Content -->
@@ -32,17 +36,17 @@
 			<div class="imgcontainer"> 
 				<span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">&times;</span>
     		<img src="../static/images/login.jpg" alt="Avatar" class="avatar">
-  		</div>
+  			</div>
 
 			<div class="container">
 				{{ form.username.label }}
-				{{ form.username(placeholder="Enter Username") }}
+				{{ form.username(placeholder="Enter username") }}
 				{% for error in form.username.errors %}
-				<span style="color: red;">[{{ error }}]</span>
+				<span style="color: red;">[{{ error }}]</span><br><br>
 				{% endfor %}
 
 				{{ form.password.label }}
-				{{ form.password(placeholder="Enter Password") }}
+				{{ form.password(placeholder="Enter password") }}
 
 				{{ form.submit(class="btn") }}
 				{{ form.remember_me() }} {{form.remember_me.label }}
@@ -54,18 +58,76 @@
     	</div>
 		</form>
 	</div>
+	<!-- Registration Modal -->
+	<div id="register" class="modal">
+
+		<!-- Modal Content -->
+		<form class="modal-content animate" action="" method="post">
+			{{ reg_form.hidden_tag() }}
+
+			<div class="container">
+				<h1>Register Now!</h1>
+				<p>
+				{{ reg_form.username.label }}<br>
+				{{ reg_form.username(size=64, placeholder="Enter username") }}<br>
+				{% for error in reg_form.username.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+				</p>
+				
+				<p>
+				{{ reg_form.email.label }}<br>
+				{{ reg_form.email(size=64, placeholder="Enter email") }}<br>
+				{% for error in reg_form.email.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+				</p>
+
+				<p>
+				{{ reg_form.password.label }}<br>
+				{{ reg_form.password(size=32, placeholder="Enter password") }}<br>
+				{% for error in reg_form.password.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+				</p>
+
+				<p>
+				{{ reg_form.password_val.label }}<br>
+				{{ reg_form.password_val(size=32, placeholder="Re-enter password") }}<br>
+				{% for error in reg_form.password_val.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+				</p>
+
+
+				{{ reg_form.submit(class="btn") }}
+			</div>
+    	
+    	<div class="container" style="background-color:#f1f1f1">
+	      <button type="button" onclick="document.getElementById('register').style.display='none'" class="cancelbtn">Cancel</button>
+    	</div>
+		</form>
+	</div>
 </body>
 
 <script>
 // Get the modal
 var modal = document.getElementById('login');
+var reg_modal = document.getElementById('register');
 
 function showlogin() {
 	modal.style.display = "block";
 }
+
+function showregister() {
+	reg_modal.style.display = "block";
+}
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
+        modal.style.display = "none";
+    }
+    if (event.target == reg_modal) {
         modal.style.display = "none";
     }
 }
