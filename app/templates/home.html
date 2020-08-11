@@ -1,27 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-<title>huixtocihuatl</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
+{% block body %}
+	<body onresize="resizeRowHeight()"></body>
+{% endblock %}
 
-<body>
-	<div class="centre">
-		<div id="titlepage">
-			<div class="item-top">
-				<div class="header"> 
-					<h1>huixtocihuatl</h1>
-				</div>
-			</div>
-			<div class="item-bottom"> 
-				<h1>homepage logged in</h1>
-			</div>
+{% block content %}
+	<div class="content-posts" id="grid">
+		<a class="item" href="{{ url_for('upload', username=current_user.username) }}">
+			<img src="../static/images/add-item.png" alt="Add item">
+			<div class="text">hello hello</div>
+		</a>
+		<div class="item">
+			<img src="../static/images/add-item.png" alt="Add item">
+			<div class="text">hello hello</div>
+		</div>
+		<div class="item">
+			<img src="../static/images/add-item.png" alt="Add item">
+			<div class="text">hello hello</div>
+		</div>
+		<div class="item">
+			<img src="../static/images/add-item.png" alt="Add item">
+			<div class="text">hello hello</div>
 		</div>
 	</div>
-</body>
+{% endblock %}
 
+{% block sidebar %}
+	<br><p> User: {{ user.username }} </p> <br>
+	<p> <a class=btn href="{{ url_for('logout') }}">Logout</a> </p>
+{% endblock %}
 
-</html>
+{% block script %}
+<script>
+	function resizeRowHeight() {
+		var grid = document.getElementById('grid');
+		var width = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-template-columns'));
+		grid.style.gridAutoRows = width + "px";
+	}
+
+	resizeRowHeight();
+
+</script>
+{% endblock %}

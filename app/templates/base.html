@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><!--
+<link rel="stylesheet" type="text/css" href="../static/css/style-home.css">
+<title>huixtocihuatl</title>-->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style-home.css') }}">
+<meta charset="UTF-8">
+</head>
+{% block body %}{% endblock %}
+
+<div class="container">
+	<div class="sidebar-left">
+		{% block content %}{% endblock %} 
+	</div>
+	<div class="empty"></div>
+	<div class="sidebar-right">
+		{% block sidebar %}{% endblock %}
+	</div>
+</div>
+
+{% block script %}{% endblock %}
+
+</html>

@@ -9,6 +9,16 @@
 </head>
 
 <body>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    <p class="flashes" style="color: red;">
+	      {% for message in messages %}
+	    	{{ message }}
+	      {% endfor %}
+	    </p>
+	  {% endif %}
+  	{% endwith %}
+
 	<div class="centre">
 		<div id="titlepage">
 			<div class="item-top">
@@ -31,7 +41,7 @@
 
 		<!-- Modal Content -->
 		<form class="modal-content animate" action="" method="post" novalidate>
-			{{ form.hidden_tag() }}
+			{{ login_form.hidden_tag() }}
 
 			<div class="imgcontainer"> 
 				<span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">&times;</span>
@@ -39,17 +49,17 @@
   			</div>
 
 			<div class="container">
-				{{ form.username.label }}
-				{{ form.username(placeholder="Enter username") }}
-				{% for error in form.username.errors %}
+				{{ login_form.username.label }}
+				{{ login_form.username(placeholder="Enter username") }}
+				{% for error in login_form.username.errors %}
 				<span style="color: red;">[{{ error }}]</span><br><br>
 				{% endfor %}
 
-				{{ form.password.label }}
-				{{ form.password(placeholder="Enter password") }}
+				{{ login_form.password.label }}
+				{{ login_form.password(placeholder="Enter password") }}
 
-				{{ form.submit(class="btn") }}
-				{{ form.remember_me() }} {{form.remember_me.label }}
+				{{ login_form.submit_login(class="btn") }}
+				{{ login_form.remember_me() }} {{ login_form.remember_me.label }}
 			</div>
     	
     	<div class="container" style="background-color:#f1f1f1">
@@ -100,7 +110,7 @@
 				</p>
 
 
-				{{ reg_form.submit(class="btn") }}
+				{{ reg_form.submit_reg(class="btn") }}
 			</div>
     	
     	<div class="container" style="background-color:#f1f1f1">

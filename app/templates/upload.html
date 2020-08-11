@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+
+{% block body %}{% endblock %}
+
+{% block content %}
+	<div class="upload-box" method="post" enctype="multipart/form-data">
+		<h1>Upload photos</h1>
+		{{ upload_form.filename.label(class="text") }}
+		{{ upload_form.filename(placeholder="What is the dish called?", class="field") }}
+
+		{{ upload_form.file.label(class="text") }}
+		{{ upload_form.file(class="field") }}
+
+		{{ upload_form.description.label(class="text") }}
+		{{ upload_form.description(class="field") }}
+
+		{{ upload_form.submit(class="btn") }}
+	</div>
+{% endblock %}
+
+{% block sidebar %}{% endblock %}
+{% block script %}{% endblock %}

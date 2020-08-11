@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" type="text/css" href="../static/css/style-home.css">
+<title>huixtocihuatl</title>
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style-home.css') }}"> -->
+<meta charset="UTF-8">
+</head>
+
+<div class="container">
+	<div class="sidebar-left">
+		<div class="upload-box" method="post" enctype="multipart/form-data">
+		<h1>Upload photos</h1>
+		{{ upload_form.filename.label }}
+		{{ upload_form.filename(placeholder="What is the dish called?") }}
+		<br><br>
+		{{ upload_form.file.label }}
+		{{ upload_form.file() }}
+		<br><br>
+		{{ upload_form.description.label }}
+		{{ upload_form.description() }}
+		<br><br>
+		{{ upload_form.submit(class="btn") }}
+	</div> 
+	</div>
+	<div class="empty"></div>
+	<div class="sidebar-right">
+		{% block sidebar %}{% endblock %}
+	</div>
+</div>
+
+{% block script %}{% endblock %}
+
+</html>
